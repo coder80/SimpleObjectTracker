@@ -33,7 +33,7 @@ int main(int argc, char** argv)
 {
 
     cv::setNumThreads(0);
-    std::string fileName = "/home/andrei_morozov/diskb/iDS2CD9396AIS 20180815AIC42956209_20190226123500_20190226125000.mp4";
+    std::string fileName = "";
 
 	if (argc > 1) {
 		fileName = std::string(argv[1]);
@@ -48,7 +48,6 @@ int main(int argc, char** argv)
 	bool swapRB = true;
 	int inpWidth = 300;
 	int inpHeight = 300;
-
 	int frameWidth = 380;
 	int frameHeight = 320;
 
