@@ -72,7 +72,7 @@ std::vector<Rect2d>  CTracker::getObjects(const Mat& frame) {
         mObjects.erase(i);
     }
 
-	return result;
+    return result;
 }
 
 bool CTracker::iou(const Rect2d& rec1, const Rect2d& rec2) {
