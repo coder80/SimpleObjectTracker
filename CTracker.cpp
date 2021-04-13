@@ -66,11 +66,11 @@ std::vector<Rect2d>  CTracker::getObjects(const Mat& frame) {
         }
 	}
 
-	for (auto i : objForDelete) {
+    for (auto i : objForDelete) {
         mTrackers[i].release();
         mTrackers.erase(i);
         mObjects.erase(i);
-	}
+    }
 
 	return result;
 }
