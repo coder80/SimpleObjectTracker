@@ -64,7 +64,7 @@ std::vector<Rect2d>  CTracker::getObjects(const Mat& frame) {
         {
             objForDelete.push_back(obj.first);
         }
-	}
+    }
 
     for (auto i : objForDelete) {
         mTrackers[i].release();
