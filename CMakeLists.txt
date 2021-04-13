@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 2.8)
+SET(CMAKE_CXX_STANDARD 14)
+project(car_detector)
+find_package(OpenCV 3.3.1 REQUIRED)
+add_executable(${PROJECT_NAME} "main.cpp" "CTracker.cpp" "CTracker.h")
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
