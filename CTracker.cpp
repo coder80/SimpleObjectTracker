@@ -46,9 +46,9 @@ std::vector<Rect2d>  CTracker::getObjects(const Mat& frame) {
 	std::vector<int64_t> objForDelete;
 	result.reserve(maxTrackObjects);
 	for (auto& obj : mTrackers) {
-		Rect2d rec;
-		auto& tracker = obj.second;
-		bool ok = tracker->update(frame, rec);
+        Rect2d rec;
+        auto& tracker = obj.second;
+        bool ok = tracker->update(frame, rec);
         ok = ok && (rec.x + rec.width < frame.size().width)
             && (rec.y + rec.height < frame.size().height)
             && (rec.y > 0)
@@ -56,36 +56,36 @@ std::vector<Rect2d>  CTracker::getObjects(const Mat& frame) {
             && (rec.width <= frame.size().width / 2)
             && (rec.height <= frame.size().height / 2);
 
-		if (ok) {
-			mObjects[obj.first] = rec;
-			result.push_back(std::move(rec));
-		}
-		else
-		{
-			objForDelete.push_back(obj.first);
-		}
+        if (ok) {
+            mObjects[obj.first] = rec;
+            result.push_back(std::move(rec));
+        }
+        else
+        {
+            objForDelete.push_back(obj.first);
+        }
 	}
 
 	for (auto i : objForDelete) {
-		mTrackers[i].release();
-		mTrackers.erase(i);
-		mObjects.erase(i);
+        mTrackers[i].release();
+        mTrackers.erase(i);
+        mObjects.erase(i);
 	}
 
 	return result;
 }
 
 bool CTracker::iou(const Rect2d& rec1, const Rect2d& rec2) {
-	float intersaction = (rec1 & rec2).area();
-	float unionrect = (rec1 | rec2).area();
-	float iouf = intersaction / (unionrect + std::numeric_limits<float>::min());
+    float intersaction = (rec1 & rec2).area();
+    float unionrect = (rec1 | rec2).area();
+    float iouf = intersaction / (unionrect + std::numeric_limits<float>::min());
     return (iouf > iouTreshold);
 }
 
 void CTracker::updateTrackerId() {
     if (mTrackerId > std::numeric_limits<int64_t>::max() - 1) {
-		mTrackerId = 0;
-	}
+        mTrackerId = 0;
+    }
 
-	++mTrackerId;
+    ++mTrackerId;
 }
