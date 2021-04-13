@@ -1,28 +1,25 @@
-//#include "stdafx.h"
 #include "CTracker.h"
-
 
 CTracker::CTracker()
 {
 }
-
 
 CTracker::~CTracker()
 {
 }
 
 void CTracker::addRect(const Mat& frame, const Rect2d& rec) {
-	bool b = false;
-	for (auto obj : mObjects) {
-		if (iou(obj.second, rec)) {
-			b = true;
-			break;
-		}
-	}
+    bool b = false;
+    for (auto obj : mObjects) {
+        if (iou(obj.second, rec)) {
+            b = true;
+            break;
+        }
+    }
 
-	if (b) { 
-		return; 
-	}
+    if (b) {
+        return;
+    }
 
     TrackerCSRT::Params param;
     param.number_of_scales = 75;
@@ -32,10 +29,10 @@ void CTracker::addRect(const Mat& frame, const Rect2d& rec) {
     param.scale_model_max_area = 512; //512.0f;
     param.scale_lr = 0.025f;//0.025f;
     mTrackers[mTrackerId] = TrackerCSRT::create(param);
-	auto tracker = mTrackers[mTrackerId];
-	tracker->init(frame, rec);
+    auto tracker = mTrackers[mTrackerId];
+    tracker->init(frame, rec);
     mObjects[mTrackerId] = std::move(rec);
-	updateTrackerId();
+    updateTrackerId();
 }
 
 bool  CTracker::trackerUpdate(const Mat& frame, Rect2d& rec) {

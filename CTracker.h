@@ -18,6 +18,7 @@ public:
 	bool trackerUpdate(const Mat& frame, Rect2d& rec);
 	std::vector<Rect2d> getObjects(const Mat& frame);
 	bool iou(const Rect2d& rec1, const Rect2d& rec2);
+
 private:
 
 	void updateTrackerId();
